@@ -1,5 +1,3 @@
-// Huffman-Coding-Part1-Skeleton.cpp 
-
 #include <set>
 #include <vector>
 #include <string>
@@ -9,48 +7,62 @@
 using namespace std;
 
 // ---------------------------------------------------------
-struct HNode
+struct Node
 {
-	int		frequency;		// relative weight
-	string	symbol;			// symbol to be encoded
-	string  bitLabel;		// will store node's binary code
-	bool	isLeft;			// Tell whether node is left or right child
-	HNode*	left;			// pointer to left child
-	HNode*	right;			// pointer to right child
-	HNode*	parent;			// pointer to parent node
-	HNode*	loc;			// location of this node
+	int	    frequency;		// relative weight
+	string  symbol;			// symbol to be encoded
+	string  bitCode;		// will store node's binary code
+	bool	isleft;			// Tell whether the node is a left child
+	Node*	left;			// pointers to left child
+	Node*	right;			// pointer to right child
+	Node*	parent;         // pointer to parent
+	Node*	loc;			// location of this node
 
-	HNode(int freqValue, string symValue) {
+	Node(int freqValue, string symValue) {
 		frequency = freqValue;
-		symbol    = symValue;
-		bitLabel  = "";
-		isLeft    = true;
-		loc       = this;
+		symbol = symValue;
+		bitCode = "";
+		isleft = true;
 		left = right = parent = nullptr;
+		loc = this;
 	}
 
-	//Use frequency to order nodes in the multiset container (minHeap)
-	bool operator< (const HNode& other) const {
+	//this order will be enforced inside STL containers (multiset)
+	bool operator< (const Node& other) const {
 		return (this->frequency < other.frequency);
 	}
 
 	// operator<< is overloaded for debugging convenience
-	friend ostream& operator<< (ostream& os, HNode& n) {
-		os << " HNode["
-			//<< " bitLabel:" << n.bitLabel
-			<< " loc:" << n.loc
-			<< " left:" << n.left << " right:" << n.right
-			//<< ", parent:" << n.parent
-			<< " isLeft:" << (n.isLeft ? "T" : "F")
-			<< " freq:" << setw(3) << n.frequency
-			<< " symbol:" << n.symbol
+	friend ostream& operator<< (ostream& sout, const Node& n) {
+		sout << " Node["
+
+			<< "   left:  " << setw(6) << (n.left == nullptr ? "null" : n.left->symbol)
+			<< ",  right: " << setw(6) << (n.right == nullptr ? "null" : n.right->symbol)
+			<< ",  parent:" << setw(6) << (n.parent == nullptr ? "null" : n.parent->symbol)
+			<< ",  isLeft:" << (n.isleft ? " T" : " F")
+			<< ",  freq:  " << setw(3) << n.frequency
+			<< ",  symbol:" << n.symbol
 			<< "]";
-		return os;
+		return sout;
 	}
 };
 
-// ---------------------------------------------------------
+
+
+
+
+// -------------------------------------------------------------
 int main()
 {
-	//TODO: implement the Huffman coding algorithm
+	// TODO: implement the Huffman coding algorithm
+	// Test your implementation with the plain text: MISSISSIPI
+	// Output the binary code for each symbol in the text
+	// ---------------------------------------------------------
+	
+	// Use the following frequency table to build your Huffman tree
+	vector<pair<int, string>> v{ {4, "I"}, {1, "M"}, {4, "S"}, {2, "P"}, };
+
+
+	
+
 }
